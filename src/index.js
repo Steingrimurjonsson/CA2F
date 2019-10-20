@@ -1,88 +1,78 @@
 import 'bootstrap/dist/css/bootstrap.css'
-import jokes from "./jokes";
 
-//const allJokes = jokes.getJokes().map(joke => "<li>"+joke+"</li>");
-//document.getElementById("jokes").innerHTML = allJokes.join("");
- 
+//document.getElementById("but").onclick = function (e) {
+  //  e.preventDefault();
+  //  const f = document.querySelector("#fName");
+ //   const l = document.querySelector("#lName");
+  //  const e = document.querySelector("#email");
+//    const p = document.querySelector("#phone");
+ //   const a = document.querySelector("#address");
+ //   const c = document.querySelector("#city");
+ //   const h = document.querySelector("#hobby");
+  // console.log(idJ.value);
+ //const allJokes = jokes.getJokeById([idJ.value]);
 
-//Joke by id and add
-document.getElementById("but").onclick = function (e) {
-    e.preventDefault();
-    const idJ = document.querySelector("#txt");
-   // console.log(idJ.value);
- const allJokes = jokes.getJokeById([idJ.value]);
- document.getElementById("jokes").innerHTML = allJokes;
+ //Add response msg
+ //document.getElementById("pCreatedEdit").innerHTML = response;
   
- }
-
- document.getElementById("but2").onclick = function (e) {
-    e.preventDefault();
-    const idJ = document.querySelector("#txt");
-   // console.log(idJ.value);
- jokes.addJoke(idJ.value);
-
- const allJokes = jokes.getJokes().map(joke => "<li>"+joke+"</li>");
- document.getElementById("jokes").innerHTML = allJokes.join("");
- }
+ //}
+ function userToTable(item) {
+    var tableData = item.map(x => "<tr><td>" + x.id + "</td><td><p>" + x.fName + "</p></td><td>" + x.lName + "</td><td>" + x.email + "</td><td>" + x.phones + "</td><td>" + x.hobbies + "</td><td>" + x.address + "</td></tr>");
+    tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>First name</th><th>Last name</th><th>Email</th><th>Phone</th><th>Hobbies</th><th>Address</th></tr>");
+    tableData.push("</table>");
+    return tableData.join('');
+}
 
  
+//function userToTable(item) {
+ //   var tableData = item.map(x => "<tr><td>" + x.id + "</td><td><p>" + x.age + "</p></td><td>" + x.name + "</td><td>" + x.gender + "</td><td>" + x.email + "</td></tr>");
+//    tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>Age</th><th>Name</th><th>Gender</th><th>Email</th></tr>");
+ //   tableData.push("</table>");
+ //   return tableData.join('');
+//}
 
- function jokeToP(item) {
-    var dataJoke = [item.joke];
-    return dataJoke;
-}
+//function userToP(item) {
+ //   var tableData = ["<tr><td>" + item.id + "</td><td><p>" + item.age + "</p></td><td>" + item.name + "</td><td>" + item.gender + "</td><td>" + item.email + "</td></tr>"];
+  //  tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>Age</th><th>Name</th><th>Gender</th><th>Email</th></tr>");
+ //   tableData.push("</table>");
+  //  return tableData;
+//}
 
-document.getElementById("but3").onclick = function getQuote(e) {
+window.onload = function (e) {
     e.preventDefault();
-    fetch("https://studypoints.info/jokes/api/jokes/period/hour")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        const quote = document.querySelector("#q");
-        quote.innerHTML = jokeToP(data);
-    });
-  
+    let url = "https://ruffsacks.com/CA2/api/person/all";
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            table.innerHTML = userToTable(data);
+
+        });
+};
+function getOptions() {
+    return {
+       method: "GET",
+       headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+       }
+    };
  }
+ window.onload = function (e) {
+    e.preventDefault();
+    fetch("https://ruffsacks.com/CA2/api/person/all", getOptions)
+    .then(res => res.json())
+    .then(data => {
+       console.log("data", data);
 
-    //setInterval(function() {
-    //    getQuote;
-  //}, 5000);
+    })
+ }
+//but.onclick = function (e) {
+   // e.preventDefault();
+  //  let url = "http://localhost:3333/api/users/" + txt.value;
+   // fetch(url)
+   //     .then(res => res.json())
+     //   .then(data => {
+    //        table.innerHTML = userToP(data);
+     //   });
+//};
 
-
- //SVG NSEW
- window.onload = function(){
-    document.getElementById('north').addEventListener("click", getNorth);
-    document.getElementById('west').addEventListener("click", getWest);
-    document.getElementById('south').addEventListener("click", getSouth);
-    document.getElementById('east').addEventListener("click", getEast);
-}
-
-var yCO = "You Clicked On = ";
-
-
-
-
-
-function getNorth(){
-    var x = document.getElementById("north");
-    var y = document.getElementById("clickedOn");
-    y.innerText = yCO +  x.id;
-}
-
-function getWest(){
-    var x = document.getElementById("west");
-    var y = document.getElementById("clickedOn");
-    y.innerText = yCO +  x.id;
-}
-
-function getSouth(){
-    var x = document.getElementById("south");
-    var y = document.getElementById("clickedOn");
-    y.innerText = yCO +  x.id;
-}
-
-function getEast(){
-    var x = document.getElementById("east");
-    var y = document.getElementById("clickedOn");
-    y.innerText = yCO +  x.id;
-}
