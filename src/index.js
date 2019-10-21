@@ -1,42 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
-//document.getElementById("but").onclick = function (e) {
-  //  e.preventDefault();
-  //  const f = document.querySelector("#fName");
- //   const l = document.querySelector("#lName");
-  //  const e = document.querySelector("#email");
-//    const p = document.querySelector("#phone");
- //   const a = document.querySelector("#address");
- //   const c = document.querySelector("#city");
- //   const h = document.querySelector("#hobby");
-  // console.log(idJ.value);
- //const allJokes = jokes.getJokeById([idJ.value]);
 
- //Add response msg
- //document.getElementById("pCreatedEdit").innerHTML = response;
-  
- //}
- function userToTable(item) {
-    var tableData = item.map(x => "<tr><td>" + x.id + "</td><td><p>" + x.fName + "</p></td><td>" + x.lName + "</td><td>" + x.email + "</td><td>" + x.phones + "</td><td>" + x.hobbies + "</td><td>" + x.address + "</td></tr>");
-    tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>First name</th><th>Last name</th><th>Email</th><th>Phone</th><th>Hobbies</th><th>Address</th></tr>");
+
+
+//document.getElementById("but").onclick = function (e) {
+//  e.preventDefault();
+
+//  console.log(idJ.value);
+//const allJokes = jokes.getJokeById([idJ.value]);
+
+//Add response msg
+//document.getElementById("pCreatedEdit").innerHTML = response;
+
+// }
+const allP = document.querySelector("#allP");
+
+function userToTable(item) {
+    var tableData = item.map(x => "<tr><td><p>" + x.fName + "</p></td><td>" + x.lName + "</td><td>" + x.email + "</td><td>" + x.phones + "</td><td>" + x.hobbies + "</td><td>" + x.address + "</td></tr>");
+    tableData.unshift("<table class=\"table\"><tr><th>First name</th><th>Last name</th><th>Email</th><th>Phone</th><th>Hobbies</th><th>Address</th></tr>");
     tableData.push("</table>");
     return tableData.join('');
 }
+function getAll() {
+    let url = "https://ruffsacks.com/CA2/api/person/all";
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.value);
+            allP.innerHTML = userToTable(data);
 
- 
-//function userToTable(item) {
- //   var tableData = item.map(x => "<tr><td>" + x.id + "</td><td><p>" + x.age + "</p></td><td>" + x.name + "</td><td>" + x.gender + "</td><td>" + x.email + "</td></tr>");
-//    tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>Age</th><th>Name</th><th>Gender</th><th>Email</th></tr>");
- //   tableData.push("</table>");
- //   return tableData.join('');
-//}
-
-//function userToP(item) {
- //   var tableData = ["<tr><td>" + item.id + "</td><td><p>" + item.age + "</p></td><td>" + item.name + "</td><td>" + item.gender + "</td><td>" + item.email + "</td></tr>"];
-  //  tableData.unshift("<table class=\"table\"><tr><th>ID</th><th>Age</th><th>Name</th><th>Gender</th><th>Email</th></tr>");
- //   tableData.push("</table>");
-  //  return tableData;
-//}
+        });
+}
 
 window.onload = function (e) {
     e.preventDefault();
@@ -44,35 +38,125 @@ window.onload = function (e) {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            table.innerHTML = userToTable(data);
+            console.log(data.value);
+            allP.innerHTML = userToTable(data);
 
         });
 };
-function getOptions() {
-    return {
-       method: "GET",
-       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-       }
-    };
- }
- window.onload = function (e) {
+
+
+
+but2.onclick = function (e) {
     e.preventDefault();
-    fetch("https://ruffsacks.com/CA2/api/person/all", getOptions)
+    let url = "https://ruffsacks.com/CA2/api/person/hobby/" + txt.value;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            table.innerHTML = userToTable(data);
+        });
+};
+
+const howManypin = document.querySelector("#howManyPeopleIn");
+but4.onclick = function (e) {
+    e.preventDefault();
+    let url = "https://ruffsacks.com/CA2/api/person/hobby/" + txt.value;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            //howManypin.innerHTML =  _.size(obj.data) ;
+            console.log(_.size(obj.data));
+        });
+};
+
+
+but4.onclick = function (e) {
+    e.preventDefault();
+    let url = "https://ruffsacks.com/CA2/api/person/hobbyAmount/" + txt.value;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            howManypin.innerHTML = userToTable(data);
+        });
+};
+
+
+
+but3.onclick = function (e) {
+    e.preventDefault();
+    let url = "https://ruffsacks.com/CA2/api/person/pInZip/" + txt.value;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            allP.innerHTML = userToTable(data);
+        });
+};
+
+
+const allZips = document.querySelector("#allZips");
+
+function zipsToTable(item) {
+    var tableData = item.map(x => "<tr><td>" + x.zipCode + "</td><td>" + x.city + "</td></tr>");
+    tableData.unshift("<table class=\"table\"><tr><th>Zips</th><th>City</th></tr>");
+    tableData.push("</table>");
+    return tableData.join('');
+}
+but5.onclick = function (e) {
+    e.preventDefault();
+    let url = "https://ruffsacks.com/CA2/api/person/allZip";
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            allZips.innerHTML = zipsToTable(data);
+        });
+};
+const f = document.querySelector("#fName");
+const l = document.querySelector("#lName");
+const em = document.querySelector("#email");
+const p = document.querySelector("#phone");
+const a = document.querySelector("#address");
+const c = document.querySelector("#city");
+const z = document.querySelector("#zip");
+const h = document.querySelector("#hobby");
+const url = "https://ruffsacks.com/CA2/api/person/";
+
+
+
+function POSTOPTION() {
+   /// const f = document.querySelector("#fName");
+//const l = document.querySelector("#lName");
+//const em = document.querySelector("#email");
+const f = document.getElementById("fName").value;
+const l = document.getElementById("lName").value;
+const em = document.getElementById("email").value;
+
+    var Method = "POST";
+    var data = {
+        fName: f,
+        lName: l,
+        email: em
+    }
+    console.log(fName);
+    let options = {
+        method: Method,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    console.log(options);
+    return options;
+}
+
+but.onclick = function (e) {
+    e.preventDefault();
+  
+    fetch(url +"add/", POSTOPTION())
     .then(res => res.json())
-    .then(data => {
-       console.log("data", data);
+        .then(function (data) {
+            console.log(data);
+            getAll();
+        })
 
-    })
- }
-//but.onclick = function (e) {
-   // e.preventDefault();
-  //  let url = "http://localhost:3333/api/users/" + txt.value;
-   // fetch(url)
-   //     .then(res => res.json())
-     //   .then(data => {
-    //        table.innerHTML = userToP(data);
-     //   });
-//};
-
+};
