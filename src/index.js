@@ -15,8 +15,6 @@ function getAll() {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            jData = JSON.stringify(data);
-            console.log(jData);
             allP.innerHTML = userToTable(data);
 
         });
