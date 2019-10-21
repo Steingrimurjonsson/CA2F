@@ -2,52 +2,70 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="style.css" rel="stylesheet">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="style.css" rel="stylesheet">
+   <script>function hidediv1() {  
+         var x = document.getElementById("div1");
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+       }</script>
+       <style>
+            #div1 {
+              display: none;
+            }
+            </style>
 </head>
 
 <body>
-  <div class="container">
-    <br/>
-    <br/>
-    <h2>CA2 GROUP #3 - REST API FUNCTONALITY</h2>
-    <form>
-       First Name:
-         <input type="text" id="fName">         <br>
-         Last Name:
-         <input type="text" id="lName">         <br>
-         Email:
-         <input type="text" id="email">         <br>
-         Phone:
-         <input type="text" id="phone">         <br>
-         Address:
-         <input type="text" id="address">         <br>
-         City:
-         <input type="text" id="city">         <br>
-         Hobby:
-         <input type="text" id="hobby">         <br>
-         <input type="submit" id="but" value="Create Person">         <br>
-         <br>
-         <br>
-         <br>
+   <div class="container">
+      <br />
+      <br />
+      <h2>CA2 GROUP #3 - REST API FUNCTONALITY</h2>
+      <button onclick="hidediv1()">Create person with all input fields</button>
 
-      <input type="text" id="txt">
-      <input type="submit" id="but2" value="GET ALL HOBBIES">
-      <input type="submit" id="but3" value="GET PEOPLE LIVING IN CITY">
-      <input type="submit" id="but4" value="GET AMOUNT OF PEOPLE IN HOBBY">
-      <input type="submit" id="but5" value="GET ALL ZIP CODES IN DENMARK">
-  </form>
-  <p id="output"> </p>
-   <p id="pCreated"> </p>
-  </div>
+      <form>
+            First Name:<br> <input type="text" id="fName"> <br>
+            Last Name:<br> <input type="text" id="lName"> <br>
+            Email:<br> <input type="text" id="email"> <br>
+   
+         <div id="div1">
+            Phone:<br> <input type="text" id="phone"> <br>
+            Address:<br> <input type="text" id="address"> <br>
+            City:<br> <input type="text" id="city"> <br>
+            Zip:<br> <input type="text" id="zip"> <br>
+            Hobby:<br> <input type="text" id="hobby"> <br>
+         </div>
 
-  <div>
 
-    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+         <input type="submit" id="but" value="Create Person"> <br>
 
-  </div>
+         <br><br><br>
 
-  <script src="bundle.js"></script>
+         Input here:<br> <input type="text" id="txt"><br>
+         <input type="submit" id="but2" value="GET ALL PEOPLE WITHIN THIS HOBBY"><br>
+         <input type="submit" id="but3" value="GET PEOPLE LIVING IN CITY"><br>
+         <input type="submit" id="but4" value="GET AMOUNT OF PEOPLE IN HOBBY"><br>
+         <input type="submit" id="but5" value="GET ALL ZIP CODES IN DENMARK"><br>
+      </form>
+      <p id="output"> </p>
+      <p id="pCreatedEdit"> </p>
+      <p id="allP"> </p>
+      <p id="howManyPeopleIn"> </p>
+      <div style="overflow-y: scroll; height:400px;">  <p id="allZips"> </p></div>
+    
+
+   </div>
+
+   <div>
+
+      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   </div>
+
+   <script src="bundle.js"></script>
 </body>
 
 </html>

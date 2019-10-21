@@ -1,24 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
 
-
-
-//document.getElementById("but").onclick = function (e) {
-//  e.preventDefault();
-
-//  console.log(idJ.value);
-//const allJokes = jokes.getJokeById([idJ.value]);
-
-//Add response msg
-//document.getElementById("pCreatedEdit").innerHTML = response;
-
-// }
 const allP = document.querySelector("#allP");
 
 function userToTable(item) {
-    var tableData = item.map(x => "<tr><td><p>" + x.fName + "</p></td><td>" + x.lName + "</td><td>" + x.email + "</td><td>" + x.phones + "</td><td>" + x.hobbies + "</td><td>" + x.address + "</td></tr>");
+    var tableData = item.map(x => "<tr><td><p>" + x.fName + "</p></td><td>" + x.lName + "</td><td>" + x.email + "</td><td>" + x.phones + "</td><td>" + x.hobbies + "</td><td>" + x.address + "" + x.additionalInfo + " " + x.cityInfo + "</td></tr>");
     tableData.unshift("<table class=\"table\"><tr><th>First name</th><th>Last name</th><th>Email</th><th>Phone</th><th>Hobbies</th><th>Address</th></tr>");
     tableData.push("</table>");
+
     return tableData.join('');
 }
 function getAll() {
@@ -26,7 +15,8 @@ function getAll() {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data.value);
+            jData = JSON.stringify(data);
+            console.log(jData);
             allP.innerHTML = userToTable(data);
 
         });
